@@ -192,5 +192,6 @@ class TestConfig(TestCase):
         params = read_config(conf_path)
         train_pipeline(params)
 
+
 if __name__ == "__main__":
     unittest.main()

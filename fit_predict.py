@@ -24,7 +24,7 @@ def train_model(data: np.ndarray, target: np.ndarray, params: TrainingParams) ->
     return model
 
 
-def predict_model(model: Pipeline, data: np.ndarray) -> np.ndarray:
+def predict_model(model: Pipeline, data: pd.DataFrame) -> np.ndarray:
     predicts = model.predict(data)
     return predicts
 

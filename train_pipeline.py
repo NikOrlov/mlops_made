@@ -15,6 +15,7 @@ logger = logging.getLogger('file_stream')
 
 def train_pipeline(params: TrainingPipelineParams):
     logger.debug('Start training!')
+    logger.debug(f'Params: {params}')
     data = read_data(params.input_data_path)
     drop_columns(data, params.feature_params)
     df_train, df_test = split_data(data, params.splitting_params)

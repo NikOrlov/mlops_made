@@ -184,10 +184,13 @@ class TestPipeline(TestCase):
 
 class TestConfig(TestCase):
     def test_read_config(self):
-        conf_path = 'configs/TrainingPipelineLogReg.yaml'
+        conf_path = 'configs/log_reg_without_params.yaml'
         params = read_config(conf_path)
         train_pipeline(params)
 
+        conf_path = 'configs/log_reg_no_regularization.yaml'
+        params = read_config(conf_path)
+        train_pipeline(params)
 
 if __name__ == "__main__":
     unittest.main()

@@ -31,6 +31,11 @@ def build_transformer(params: FeatureParams) -> ColumnTransformer:
     return data_transformer
 
 
+def drop_columns(data: pd.DataFrame, params: FeatureParams):
+    if params.columns_to_drop is not None:
+        data = data.drop(params.columns_to_drop, axis=1)
+
+
 def split_features_target(data: pd.DataFrame, params: FeatureParams) -> Tuple[pd.DataFrame, pd.DataFrame]:
     target = data[params.target_column]
     features = data.drop(params.target_column, axis=1)

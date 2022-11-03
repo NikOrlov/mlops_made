@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from faker import Faker
 from entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
-from make_dataset import split_data
+from make_dataset import split_data, read_config
 from make_features import transform_data, build_transformer
 from fit_predict import train_model, predict_model, evaluate_model
 from train_pipeline import train_pipeline, predict_pipeline
@@ -154,8 +154,8 @@ class TestModel(TestCase):
 class TestPipeline(TestCase):
     def test_pipeline(self):
         input_path = 'data/raw/heart_cleveland_upload.csv'
-        output_path = 'pipeline.pkl'
-        metric_path = 'metrics.json'
+        output_path = 'models/pipeline.pkl'
+        metric_path = 'metric/metrics.json'
         splitting_params = SplittingParams(test_size=0.3, random_state=42, shuffle=True)
         feature_params = FeatureParams(numerical_columns=['age', 'oldpeak', 'trestbps', 'thalach', 'chol'],
                                        categorical_columns=['sex', 'restecg', 'slope', 'fbs', 'cp', 'exang', 'thal', 'ca'],
@@ -178,8 +178,15 @@ class TestPipeline(TestCase):
     def test_prediction(self):
         data = pd.read_csv('data/raw/heart_cleveland_upload.csv')
         data = data.drop('condition', axis=1)
-        preds = predict_pipeline('pipeline.pkl', data, 'preds.txt')
+        preds = predict_pipeline('models/pipeline.pkl', data, 'preds.txt')
         print(preds)
+
+
+class TestConfig(TestCase):
+    def test_read_config(self):
+        conf_path = 'configs/TrainingPipelineLogReg.yaml'
+        params = read_config(conf_path)
+        train_pipeline(params)
 
 
 if __name__ == "__main__":

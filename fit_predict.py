@@ -1,5 +1,6 @@
 import json
 import pickle
+import os
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -15,10 +16,12 @@ SklearnModel = Union[LogisticRegression]
 
 
 def train_model(data: np.ndarray, target: np.ndarray, params: TrainingParams) -> SklearnModel:
+    if params.model_params is None:
+        params.model_params = {}
     if params.model == 'LogisticRegression':
-        model = LogisticRegression()
+        model = LogisticRegression(**params.model_params)
     elif params.model == 'RandomForestClassifier':
-        model = RandomForestClassifier()
+        model = RandomForestClassifier(**params.model_params)
     else:
         raise NotImplementedError
 
@@ -47,6 +50,7 @@ def build_inference_pipeline(transforms: ColumnTransformer, model: SklearnModel)
 
 
 def serialize(obj: object, path: str, type: str = 'pickle'):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     if type == 'pickle':
         with open(path, 'wb') as file:
             pickle.dump(obj, file)

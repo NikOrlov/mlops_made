@@ -1,5 +1,3 @@
-import logging
-
 log_conf = {
     "version": 1,
     "formatters": {

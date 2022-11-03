@@ -14,7 +14,7 @@ class SplittingParams:
 class FeatureParams:
     numerical_columns: List[str]
     categorical_columns: List[str]
-    columns_to_drop: List[str]
+    columns_to_drop: Optional[List[str]]
     target_column: str
     fill_na_numerical_strategy: str
     fill_na_categorical_strategy: str

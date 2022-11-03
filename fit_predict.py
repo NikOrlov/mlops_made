@@ -1,3 +1,5 @@
+import json
+import pickle
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -38,7 +40,18 @@ def evaluate_model(predicts: np.ndarray, target: np.ndarray) -> Dict[str, float]
     return scores
 
 
-def inference_pipeline(transforms: ColumnTransformer, model: SklearnModel) -> Pipeline:
+def build_inference_pipeline(transforms: ColumnTransformer, model: SklearnModel) -> Pipeline:
     pipe = Pipeline([('transforms', transforms),
                      ('model', model)])
     return pipe
+
+
+def serialize(obj: object, path: str, type: str = 'pickle'):
+    if type == 'pickle':
+        with open(path, 'wb') as file:
+            pickle.dump(obj, file)
+    elif type == 'json':
+        with open(path, 'w') as file:
+            json.dump(obj, file)
+    else:
+        raise NotImplementedError

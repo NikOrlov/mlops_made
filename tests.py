@@ -8,7 +8,7 @@ from entities import SplittingParams, FeatureParams, TrainingParams, TrainingPip
 from make_dataset import split_data
 from make_features import transform_data, build_transformer
 from fit_predict import train_model, predict_model, evaluate_model
-from train_pipeline import run_train_pipeline
+from train_pipeline import train_pipeline, predict_pipeline
 
 
 def create_fake_frame(num_rows: int) -> pd.DataFrame:
@@ -154,18 +154,18 @@ class TestModel(TestCase):
 class TestPipeline(TestCase):
     def test_pipeline(self):
         input_path = 'data/raw/heart_cleveland_upload.csv'
-        output_path = ''
-        metric_path = ''
-        splitting_params = SplittingParams(test_size=0.3, random_state=None, shuffle=True)
+        output_path = 'pipeline.pkl'
+        metric_path = 'metrics.json'
+        splitting_params = SplittingParams(test_size=0.3, random_state=42, shuffle=True)
         feature_params = FeatureParams(numerical_columns=['age', 'oldpeak', 'trestbps', 'thalach', 'chol'],
                                        categorical_columns=['sex', 'restecg', 'slope', 'fbs', 'cp', 'exang', 'thal', 'ca'],
-                                       columns_to_drop='',
+                                       columns_to_drop=[],
                                        target_column='condition',
                                        fill_na_numerical_strategy='mean',
                                        fill_na_categorical_strategy='most_frequent')
         training_params = TrainingParams(model='LogisticRegression',
                                          model_params=None,
-                                         random_state=None)
+                                         random_state=42)
 
         params = TrainingPipelineParams(input_data_path=input_path,
                                         output_model_path=output_path,
@@ -173,7 +173,13 @@ class TestPipeline(TestCase):
                                         splitting_params=splitting_params,
                                         feature_params=feature_params,
                                         training_params=training_params)
-        run_train_pipeline(params)
+        train_pipeline(params)
+
+    def test_prediction(self):
+        data = pd.read_csv('data/raw/heart_cleveland_upload.csv')
+        data = data.drop('condition', axis=1)
+        preds = predict_pipeline('pipeline.pkl', data, 'preds.txt')
+        print(preds)
 
 
 if __name__ == "__main__":

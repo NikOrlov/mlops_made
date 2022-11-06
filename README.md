@@ -1,6 +1,6 @@
 # mlops_made
 Создание виртуального окружения (команды запускаются из корневой директории, unix-like системах):
-~~
+~~~
 python -m venv .env
 source .env/bin/activate
 pip install -r requirements.txt

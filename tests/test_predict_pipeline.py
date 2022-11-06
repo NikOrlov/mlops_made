@@ -2,12 +2,12 @@ from unittest import TestCase
 import unittest
 import os
 from predict import predict_pipeline
-from data_generator import fake_dataset_builder
+from tests.data_generator import fake_dataset_builder
 
 
 class TestPredict(TestCase):
     def test_missed_column(self):
-        model_path = '../models/model.pkl'
+        model_path = 'models/model.pkl'
         data_path = 'data_missed_column.csv'
         dataframe = fake_dataset_builder.generate_dataset()
         dataframe.drop('sex', axis=1, inplace=True)
@@ -18,7 +18,7 @@ class TestPredict(TestCase):
         os.remove(data_path)
 
     def test_renamed_column(self):
-        model_path = '../models/model.pkl'
+        model_path = 'models/model.pkl'
         data_path = 'data_renamed_column.csv'
         output_path = 'error'
         dataframe = fake_dataset_builder.generate_dataset()

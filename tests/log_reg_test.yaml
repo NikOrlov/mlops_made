@@ -1,6 +1,6 @@
-input_data_path: "../data/raw/heart_cleveland_upload.csv"
-output_model_path: "models/model_test.pkl"
-metric_path: "metrics/metric_test.json"
+input_data_path: "data/raw/heart_cleveland_upload.csv"
+output_model_path: "tests/models/model_test.pkl"
+metric_path: "tests/metrics/metric_test.json"
 splitting_params:
   test_size: 0.3
   random_state: 42

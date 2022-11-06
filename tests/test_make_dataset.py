@@ -2,8 +2,8 @@ from unittest import TestCase
 import unittest
 import dataclasses
 import pandas as pd
-from make_dataset import split_data, read_config
-from entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
+from src.make_dataset import split_data, read_config
+from src.entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
 from tests.data_generator import fake_dataset_builder
 
 
@@ -45,7 +45,7 @@ class TestReadData(TestCase):
                                              feature_params=feature_params,
                                              training_params=training_params)
 
-        config_path = '../configs/log_reg_no_regularization.yaml'
+        config_path = 'configs/log_reg_no_regularization.yaml'
         param_my = read_config(config_path)
         self.assertDictEqual(dataclasses.asdict(param_my), dataclasses.asdict(params_true))
 

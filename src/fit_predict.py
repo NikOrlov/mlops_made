@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score, accuracy_score, f1_score
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from entities import TrainingParams
+from src.entities import TrainingParams
 
 
 SklearnModel = Union[LogisticRegression]

@@ -1,14 +1,14 @@
 import logging.config
 import click
-from make_dataset import read_data, split_data, read_config
-from entities import TrainingPipelineParams
-from make_features import build_transformer, transform_data, split_features_target, drop_columns
-from fit_predict import train_model, \
+from src.make_dataset import read_data, split_data, read_config
+from src.entities import TrainingPipelineParams
+from src.make_features import build_transformer, transform_data, split_features_target, drop_columns
+from src.fit_predict import train_model, \
     predict_model, \
     evaluate_model, \
     build_inference_pipeline, \
     serialize
-from logger import log_conf
+from src.logger import log_conf
 
 
 logging.config.dictConfig(log_conf)

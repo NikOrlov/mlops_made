@@ -5,7 +5,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from entities import FeatureParams
+from src.entities import FeatureParams
 
 
 def build_categorical_pipeline(params: FeatureParams) -> Pipeline:

@@ -2,8 +2,8 @@ from unittest import TestCase
 import unittest
 import numpy as np
 import pandas as pd
-from make_features import build_transformer, transform_data
-from entities import FeatureParams
+from src.make_features import build_transformer, transform_data
+from src.entities import FeatureParams
 
 
 class TestMakeDataset(TestCase):

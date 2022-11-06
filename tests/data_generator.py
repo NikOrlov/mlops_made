@@ -1,7 +1,7 @@
 import pandas as pd
 from tests.fake_data import FakeDatasetBuilder
 
-DATA_PATH = '../data/raw/heart_cleveland_upload.csv'
+DATA_PATH = 'data/raw/heart_cleveland_upload.csv'
 TARGET_COLUMN = 'condition'
 
 df = pd.read_csv(DATA_PATH)

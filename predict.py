@@ -1,6 +1,6 @@
 import pickle
 import click
-from make_dataset import read_data
+from src.make_dataset import read_data
 
 
 def predict_pipeline(pipeline_path: str, data_path: str, output_path: str):

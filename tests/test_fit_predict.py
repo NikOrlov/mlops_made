@@ -2,8 +2,8 @@ from unittest import TestCase
 import unittest
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-from entities import TrainingParams
-from fit_predict import train_model, predict_model, evaluate_model
+from src.entities import TrainingParams
+from src.fit_predict import train_model, predict_model, evaluate_model
 from tests.data_generator import fake_dataset_builder
 
 

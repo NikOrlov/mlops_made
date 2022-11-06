@@ -1,7 +1,7 @@
 from unittest import TestCase
 import unittest
 import os
-from make_dataset import read_config
+from src.make_dataset import read_config
 from train import train_pipeline
 
 
@@ -13,7 +13,7 @@ class TestCaseBase(TestCase):
 
 class TestTrain(TestCaseBase):
     def test_train_pipeline(self):
-        config_path = 'log_reg_test.yaml'
+        config_path = 'tests/log_reg_test.yaml'
         params = read_config(config_path)
         train_pipeline(params)
         self.assertIsFile(params.output_model_path)

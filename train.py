@@ -41,7 +41,7 @@ def train_pipeline(params: TrainingPipelineParams):
 
     scores = {'train': score_train, 'test': score_test}
     serialize(scores, params.metric_path, 'json')
-    serialize(inference_pipeline, params.output_model_path, 'pickle')
+    serialize({'pipeline': inference_pipeline, 'train_config': params}, params.output_model_path, 'pickle')
 
 
 @click.command()

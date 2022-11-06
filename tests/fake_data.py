@@ -35,7 +35,7 @@ class FakeDatasetBuilder:
                 is_categorical = False
             self.features_info[column] = Feature(column, is_categorical, min_val, max_val)
 
-    def generate_dataset(self, num_rows) -> pd.DataFrame:
+    def generate_dataset(self, num_rows=100) -> pd.DataFrame:
         if not self.features_info:
             self.build_features_info()
 
@@ -48,7 +48,7 @@ class FakeDatasetBuilder:
 
 
 if __name__ == '__main__':
-    data_path = 'data/raw/heart_cleveland_upload.csv'
+    data_path = '../data/raw/heart_cleveland_upload.csv'
     df = pd.read_csv(data_path)
     numerical_columns = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
     categorical_columns = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']

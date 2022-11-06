@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import unittest
 from unittest import TestCase
-from mlops_made.entities import FeatureParams
-from mlops_made.make_features import build_transformer, transform_data
+from make_features import build_transformer, transform_data
+from entities import FeatureParams
 
 
 class TestMakeDataset(TestCase):

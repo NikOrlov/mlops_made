@@ -175,11 +175,7 @@ class TestPipeline(TestCase):
                                         training_params=training_params)
         train_pipeline(params)
 
-    def test_prediction(self):
-        data = pd.read_csv('data/raw/heart_cleveland_upload.csv')
-        data = data.drop('condition', axis=1)
-        preds = predict_pipeline('models/pipeline.pkl', data, 'preds.txt')
-        print(preds)
+
 
 
 class TestConfig(TestCase):

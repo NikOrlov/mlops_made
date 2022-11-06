@@ -1,4 +1,3 @@
-import argparse
 import logging.config
 from make_dataset import read_data, split_data, read_config
 from entities import TrainingPipelineParams

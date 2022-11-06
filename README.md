@@ -5,14 +5,14 @@ python -m venv .env
 source .env/bin/activate
 pip install -r requirements.txt
 ~~~
-Посмотреть EDA 
+### Посмотреть EDA 
 
 В корне вызывается команда, сам ноутбук лежит в директории `notebooks/EDA.ipynb`:
 ```
 jupyter-notebook
 ```
 
-Обучение модели:
+### Обучение модели:
 
 В корне вызывается команда (`config_path` - путь до `.yaml` файла):
 ~~~
@@ -20,7 +20,7 @@ python train.py config_path
 python train.py configs/log_reg_no_regularization.yaml
 ~~~
 
-Предсказание модели:
+### Предсказание модели:
 
 В корне вызывается команда (`model_path` - путь до модели, `data_path` - путь до csv-файла(важно наличие столбцов как при обучении),
 `output_path` - путь для файла с предсказаниями)

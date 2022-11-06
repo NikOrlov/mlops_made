@@ -15,6 +15,10 @@ class TestPredict(TestCase):
     def test_missed_column(self):
         config_path = 'tests/log_reg_test.yaml'
         params = read_config(config_path)
+
+        data = fake_dataset_builder.generate_dataset()
+        data.to_csv(params.input_data_path)
+
         train_pipeline(params)
 
         model_path = 'tests/models/model_test.pkl'
@@ -25,11 +29,16 @@ class TestPredict(TestCase):
         output_path = 'error'
         with self.assertRaises(KeyError):
             predict_pipeline(model_path, data_path, output_path)
+        os.remove(params.input_data_path)
         os.remove(data_path)
 
     def test_renamed_column(self):
         config_path = 'tests/log_reg_test.yaml'
         params = read_config(config_path)
+
+        data = fake_dataset_builder.generate_dataset()
+        data.to_csv(params.input_data_path)
+
         train_pipeline(params)
 
         model_path = 'tests/models/model_test.pkl'
@@ -41,8 +50,9 @@ class TestPredict(TestCase):
 
         with self.assertRaises(KeyError):
             predict_pipeline(model_path, data_path, output_path)
-        os.remove(data_path)
 
+        os.remove(params.input_data_path)
+        os.remove(data_path)
         os.remove(params.metric_path)
         os.remove(params.output_model_path)
         os.removedirs(os.path.dirname(params.output_model_path))

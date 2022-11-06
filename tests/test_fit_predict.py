@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from src.entities import TrainingParams
 from src.fit_predict import train_model, predict_model, evaluate_model
-from tests.data_generator import fake_dataset_builder
 
 
 with open('tests/fake_dataset_builder.pkl', 'rb') as file:

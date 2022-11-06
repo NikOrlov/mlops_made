@@ -1,10 +1,14 @@
 import logging.config
+import click
 from make_dataset import read_data, split_data, read_config
 from entities import TrainingPipelineParams
 from make_features import build_transformer, transform_data, split_features_target, drop_columns
-from fit_predict import train_model, predict_model, evaluate_model, build_inference_pipeline, serialize
+from fit_predict import train_model, \
+    predict_model, \
+    evaluate_model, \
+    build_inference_pipeline, \
+    serialize
 from logger import log_conf
-import click
 
 
 logging.config.dictConfig(log_conf)
@@ -21,9 +25,9 @@ def train_pipeline(params: TrainingPipelineParams):
 
     df_features_train, df_target_train = split_features_target(df_train, params.feature_params)
     column_transformer = build_transformer(params.feature_params)
-    X_train = transform_data(df_features_train, column_transformer)
+    x_train = transform_data(df_features_train, column_transformer)
     y_train = df_target_train.values
-    model = train_model(X_train, y_train, params.training_params)
+    model = train_model(x_train, y_train, params.training_params)
     inference_pipeline = build_inference_pipeline(column_transformer, model)
 
     predictions_train = predict_model(inference_pipeline, df_features_train)

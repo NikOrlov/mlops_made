@@ -1,7 +1,7 @@
-import pandas as pd
-import unittest
 from unittest import TestCase
+import unittest
 import dataclasses
+import pandas as pd
 from make_dataset import split_data, read_config
 from entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
 from tests.data_generator import fake_dataset_builder
@@ -12,11 +12,11 @@ class TestReadData(TestCase):
         num_rows = 100
         params = SplittingParams(test_size=0.3, random_state=42, shuffle=False)
         test_size = int(num_rows * params.test_size)
-        df = fake_dataset_builder.generate_dataset(num_rows)
-        df_train_true = df[:-test_size]
-        df_test_true = df[-test_size:]
+        dataframe = fake_dataset_builder.generate_dataset(num_rows)
+        df_train_true = dataframe[:-test_size]
+        df_test_true = dataframe[-test_size:]
 
-        df_train_my, df_test_my = split_data(df, params)
+        df_train_my, df_test_my = split_data(dataframe, params)
         self.assertTrue(pd.DataFrame.equals(df_train_my, df_train_true))
         self.assertTrue(pd.DataFrame.equals(df_test_my, df_test_true))
 
@@ -25,13 +25,15 @@ class TestReadData(TestCase):
         output_path = 'models/model.pkl'
         metric_path = 'metrics/metric.json'
         splitting_params = SplittingParams(test_size=0.3, random_state=42, shuffle=True)
-        feature_params = FeatureParams(numerical_columns=['age', 'trestbps', 'chol', 'thalach', 'oldpeak'],
-                                       categorical_columns=['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca',
-                                                            'thal'],
-                                       columns_to_drop=None,
-                                       target_column='condition',
-                                       fill_na_numerical_strategy='mean',
-                                       fill_na_categorical_strategy='most_frequent')
+        feature_params = \
+            FeatureParams(numerical_columns=
+                          ['age', 'trestbps', 'chol', 'thalach', 'oldpeak'],
+                          categorical_columns=
+                          ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal'],
+                          columns_to_drop=None,
+                          target_column='condition',
+                          fill_na_numerical_strategy='mean',
+                          fill_na_categorical_strategy='most_frequent')
         training_params = TrainingParams(model='LogisticRegression',
                                          model_params={
                                              'penalty': 'none'

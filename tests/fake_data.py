@@ -18,10 +18,10 @@ class Feature:
 
 
 class FakeDatasetBuilder:
-    def __init__(self, df: pd.DataFrame, categorical_columns, numerical_columns, target):
-        self.df = df
-        self.categorical_columns = categorical_columns
-        self.numerical_columns = numerical_columns
+    def __init__(self, dataframe: pd.DataFrame, categ_columns, num_columns, target):
+        self.df = dataframe
+        self.categorical_columns = categ_columns
+        self.numerical_columns = num_columns
         self.target = target
         self.features_info = {}
 
@@ -43,15 +43,19 @@ class FakeDatasetBuilder:
         for column, feature in self.features_info.items():
             feature.generate_data(num_rows)
             df_data[column] = feature.data
-        df = pd.DataFrame.from_dict(df_data)
-        return df
+        dataframe = pd.DataFrame.from_dict(df_data)
+        return dataframe
 
 
 if __name__ == '__main__':
-    data_path = '../data/raw/heart_cleveland_upload.csv'
-    df = pd.read_csv(data_path)
+    DATA_PATH = '../data/raw/heart_cleveland_upload.csv'
+    TARGET_COLUMN = 'condition'
+
+    df = pd.read_csv(DATA_PATH)
     numerical_columns = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
     categorical_columns = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal']
-    target_column = 'condition'
-    fake_dataset_builder = FakeDatasetBuilder(df, categorical_columns, numerical_columns, target_column)
+    fake_dataset_builder = FakeDatasetBuilder(df,
+                                              categorical_columns,
+                                              numerical_columns,
+                                              TARGET_COLUMN)
     fake_dataset = fake_dataset_builder.generate_dataset(10)

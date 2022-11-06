@@ -1,3 +1,4 @@
+from typing import Union, Dict
 import json
 import pickle
 import os
@@ -5,11 +6,10 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from entities import TrainingParams
-from typing import Union, Dict
 from sklearn.metrics import roc_auc_score, accuracy_score, f1_score
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from entities import TrainingParams
 
 
 SklearnModel = Union[LogisticRegression]
@@ -49,12 +49,12 @@ def build_inference_pipeline(transforms: ColumnTransformer, model: SklearnModel)
     return pipe
 
 
-def serialize(obj: object, path: str, type: str = 'pickle'):
+def serialize(obj: object, path: str, data_type: str = 'pickle'):
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    if type == 'pickle':
+    if data_type == 'pickle':
         with open(path, 'wb') as file:
             pickle.dump(obj, file)
-    elif type == 'json':
+    elif data_type == 'json':
         with open(path, 'w') as file:
             json.dump(obj, file)
     else:

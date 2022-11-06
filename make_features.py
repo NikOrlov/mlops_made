@@ -1,11 +1,11 @@
+from typing import Tuple
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
-from entities import FeatureParams
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from typing import Tuple
+from entities import FeatureParams
 
 
 def build_categorical_pipeline(params: FeatureParams) -> Pipeline:
@@ -25,8 +25,12 @@ def build_transformer(params: FeatureParams) -> ColumnTransformer:
     numerical_pipe = build_numerical_pipeline(params)
 
     data_transformer = ColumnTransformer([
-                                        ("categorical features", categorical_pipe, params.categorical_columns),
-                                        ("numerical features", numerical_pipe, params.numerical_columns)
+                                        ("categorical features",
+                                         categorical_pipe,
+                                         params.categorical_columns),
+                                        ("numerical features",
+                                         numerical_pipe,
+                                         params.numerical_columns)
                                         ])
     return data_transformer
 
@@ -36,7 +40,8 @@ def drop_columns(data: pd.DataFrame, params: FeatureParams):
         data.drop(params.columns_to_drop, axis=1, inplace=True)
 
 
-def split_features_target(data: pd.DataFrame, params: FeatureParams) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def split_features_target(data: pd.DataFrame, params: FeatureParams) -> \
+        Tuple[pd.DataFrame, pd.DataFrame]:
     target = data[params.target_column]
     features = data.drop(params.target_column, axis=1)
     return features, target

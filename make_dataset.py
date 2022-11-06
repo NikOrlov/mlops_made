@@ -1,8 +1,8 @@
+from typing import Tuple
 import yaml
 import pandas as pd
-from entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
-from typing import Tuple
 from sklearn.model_selection import train_test_split
+from entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
 
 
 def read_data(path: str) -> pd.DataFrame:
@@ -31,5 +31,3 @@ def split_data(data: pd.DataFrame, params: SplittingParams) -> Tuple[pd.DataFram
                                            random_state=params.random_state,
                                            shuffle=params.shuffle)
     return train_set, test_set
-
-

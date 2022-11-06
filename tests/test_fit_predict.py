@@ -1,6 +1,6 @@
-import numpy as np
-import unittest
 from unittest import TestCase
+import unittest
+import numpy as np
 from sklearn.linear_model import LogisticRegression
 from entities import TrainingParams
 from fit_predict import train_model, predict_model, evaluate_model
@@ -12,18 +12,18 @@ class TestModel(TestCase):
         params = TrainingParams(model='LogisticRegression', model_params=None, random_state=None)
         data = fake_dataset_builder.generate_dataset()
         y_train = data['condition'].values
-        X_train = data.drop('condition', axis=1).values
-        model = train_model(X_train, y_train, params)
+        x_train = data.drop('condition', axis=1).values
+        model = train_model(x_train, y_train, params)
         model_true = LogisticRegression()
-        model_true.fit(X_train, y_train)
+        model_true.fit(x_train, y_train)
         self.assertListEqual(model_true.coef_[0].tolist(), model.coef_[0].tolist())
 
     def test_predict(self):
         params = TrainingParams(model='LogisticRegression', model_params=None, random_state=None)
         y_train = np.array([1, 1, 0])
-        X_train = np.ones((3, 3)) * y_train.reshape(-1, 1)
-        model = train_model(X_train, y_train, params)
-        predict_my = predict_model(model, X_train).tolist()
+        x_train = np.ones((3, 3)) * y_train.reshape(-1, 1)
+        model = train_model(x_train, y_train, params)
+        predict_my = predict_model(model, x_train).tolist()
         predict_true = y_train.tolist()
         self.assertListEqual(predict_true, predict_my)
 

@@ -1,13 +1,13 @@
+from unittest import TestCase
+import unittest
 import numpy as np
 import pandas as pd
-import unittest
-from unittest import TestCase
 from make_features import build_transformer, transform_data
 from entities import FeatureParams
 
 
 class TestMakeDataset(TestCase):
-    def test_OHE(self):
+    def test_one_hot_encoding(self):
         params = FeatureParams(numerical_columns=[],
                                categorical_columns=['type'],
                                fill_na_categorical_strategy='most_frequent',

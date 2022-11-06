@@ -3,7 +3,7 @@ name: Training model ci
 on:
   push:
     branches: [ main ]
-  pull_reques:
+  pull_request:
     branches: [ main ]
 
 jobs:

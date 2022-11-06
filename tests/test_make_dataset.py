@@ -26,10 +26,8 @@ class TestReadData(TestCase):
         metric_path = 'metrics/metric.json'
         splitting_params = SplittingParams(test_size=0.3, random_state=42, shuffle=True)
         feature_params = \
-            FeatureParams(numerical_columns=
-                          ['age', 'trestbps', 'chol', 'thalach', 'oldpeak'],
-                          categorical_columns=
-                          ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal'],
+            FeatureParams(numerical_columns=['age', 'trestbps', 'chol', 'thalach', 'oldpeak'],
+                          categorical_columns=['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal'],
                           columns_to_drop=None,
                           target_column='condition',
                           fill_na_numerical_strategy='mean',

@@ -1,5 +1,6 @@
 from unittest import TestCase
 import unittest
+import pickle
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from src.entities import TrainingParams
@@ -48,4 +49,6 @@ class TestModel(TestCase):
 
 
 if __name__ == '__main__':
+    with open('fake_dataset_builder.pkl', 'rb') as file:
+        fake_dataset_builder = pickle.load(file)
     unittest.main()

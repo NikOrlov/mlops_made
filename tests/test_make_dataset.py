@@ -1,10 +1,14 @@
 from unittest import TestCase
 import unittest
 import dataclasses
+import pickle
 import pandas as pd
 from src.make_dataset import split_data, read_config
 from src.entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
-from tests.data_generator import fake_dataset_builder
+
+
+with open('fake_dataset_builder.pkl', 'rb') as file:
+    fake_dataset_builder = pickle.load(file)
 
 
 class TestReadData(TestCase):

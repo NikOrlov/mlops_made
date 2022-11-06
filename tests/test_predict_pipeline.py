@@ -1,10 +1,14 @@
 from unittest import TestCase
 import unittest
 import os
+import pickle
 from predict import predict_pipeline
-from tests.data_generator import fake_dataset_builder
 from src.make_dataset import read_config
 from train import train_pipeline
+
+
+with open('fake_dataset_builder.pkl', 'rb') as file:
+    fake_dataset_builder = pickle.load(file)
 
 
 class TestPredict(TestCase):

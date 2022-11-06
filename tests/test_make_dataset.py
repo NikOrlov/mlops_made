@@ -7,7 +7,7 @@ from src.make_dataset import split_data, read_config
 from src.entities import SplittingParams, FeatureParams, TrainingParams, TrainingPipelineParams
 
 
-with open('fake_dataset_builder.pkl', 'rb') as file:
+with open('tests/fake_dataset_builder.pkl', 'rb') as file:
     fake_dataset_builder = pickle.load(file)
 
 

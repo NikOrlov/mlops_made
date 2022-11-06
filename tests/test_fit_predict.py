@@ -8,6 +8,10 @@ from src.fit_predict import train_model, predict_model, evaluate_model
 from tests.data_generator import fake_dataset_builder
 
 
+with open('tests/fake_dataset_builder.pkl', 'rb') as file:
+    fake_dataset_builder = pickle.load(file)
+
+
 class TestModel(TestCase):
     def test_train(self):
         params = TrainingParams(model='LogisticRegression', model_params=None, random_state=None)
@@ -49,6 +53,5 @@ class TestModel(TestCase):
 
 
 if __name__ == '__main__':
-    with open('fake_dataset_builder.pkl', 'rb') as file:
-        fake_dataset_builder = pickle.load(file)
+
     unittest.main()

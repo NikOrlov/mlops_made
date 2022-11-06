@@ -3,11 +3,17 @@ import unittest
 import os
 from predict import predict_pipeline
 from tests.data_generator import fake_dataset_builder
+from src.make_dataset import read_config
+from train import train_pipeline
 
 
 class TestPredict(TestCase):
     def test_missed_column(self):
-        model_path = 'models/model.pkl'
+        config_path = 'tests/log_reg_test.yaml'
+        params = read_config(config_path)
+        train_pipeline(params)
+
+        model_path = 'tests/models/model_test.pkl'
         data_path = 'data_missed_column.csv'
         dataframe = fake_dataset_builder.generate_dataset()
         dataframe.drop('sex', axis=1, inplace=True)
@@ -18,7 +24,11 @@ class TestPredict(TestCase):
         os.remove(data_path)
 
     def test_renamed_column(self):
-        model_path = 'models/model.pkl'
+        config_path = 'tests/log_reg_test.yaml'
+        params = read_config(config_path)
+        train_pipeline(params)
+
+        model_path = 'tests/models/model_test.pkl'
         data_path = 'data_renamed_column.csv'
         output_path = 'error'
         dataframe = fake_dataset_builder.generate_dataset()
@@ -28,6 +38,11 @@ class TestPredict(TestCase):
         with self.assertRaises(KeyError):
             predict_pipeline(model_path, data_path, output_path)
         os.remove(data_path)
+
+        os.remove(params.metric_path)
+        os.remove(params.output_model_path)
+        os.removedirs(os.path.dirname(params.output_model_path))
+        os.removedirs(os.path.dirname(params.metric_path))
 
 
 if __name__ == '__main__':
